@@ -1,0 +1,71 @@
+/* MSM Analysis */
+
+SELECT RECIP_ID, DS1_ADMIN_DATE, RECIP_AGE,
+    CASE WHEN RECIP_AGE between 15 and 29 then '15-29'
+         WHEN RECIP_AGE between 30 and 39 then '30-29'
+         WHEN RECIP_AGE between 40 and 49 then '40-49'
+         WHEN RECIP_AGE between 50 and 59 then '50-59'
+         WHEN RECIP_AGE >= 60 then '60+'
+    End as Age_Group
+    FROM "Joined_TEMP"
+WHERE "Sex Assigned at Birth" = 'Male'
+AND "Gender Identity" = 'Man/Male'
+AND "Sexual Orientation" = 'Gay, lesbian, or same-gender loving'
+AND FULLY_VACCINATED = FALSE /* 1st doses only */
+AND DS1_ADMIN_DATE > '5/8/2022'
+AND DS1_ADMIN_DATE < '12/31/2022'
+ORDER BY DS1_ADMIN_DATE asc
+
+/* 2nd doses only */
+
+SELECT RECIP_ID, DS2_ADMIN_DATE, RECIP_AGE,
+    CASE WHEN RECIP_AGE between 15 and 29 then '15-29'
+         WHEN RECIP_AGE between 30 and 39 then '30-29'
+         WHEN RECIP_AGE between 40 and 49 then '40-49'
+         WHEN RECIP_AGE between 50 and 59 then '50-59'
+         WHEN RECIP_AGE >= 60 then '60+'
+    End as Age_Group
+    FROM "Joined_TEMP"
+WHERE "Sex Assigned at Birth" = 'Male'
+AND "Gender Identity" = 'Man/Male'
+AND "Sexual Orientation" = 'Gay, lesbian, or same-gender loving'
+AND FULLY_VACCINATED = TRUE /* 2nd doses only */
+AND DS2_ADMIN_DATE > '5/8/2022'
+AND DS2_ADMIN_DATE < '12/31/2022'
+ORDER BY DS2_ADMIN_DATE asc
+
+/* Ethnicity */
+
+SELECT RECIP_ID, DS1_ADMIN_DATE, RECIP_RACE_ETH,
+    CASE WHEN RECIP_RACE_ETH = 'Latino' then 'Hispanic'
+         WHEN RECIP_RACE_ETH = 'White' then 'Non-Hispanic White'
+         WHEN RECIP_RACE_ETH = 'Asian' then 'Non-Hispanic Asian'
+         WHEN RECIP_RACE_ETH = 'Black or African American' then 'Non-Hispanic Black'
+         ELSE 'Other'
+    End as Ethnic_Group
+    FROM "Joined_TEMP"
+WHERE "Sex Assigned at Birth" = 'Male'
+AND "Gender Identity" = 'Man/Male'
+AND "Sexual Orientation" = 'Gay, lesbian, or same-gender loving'
+AND FULLY_VACCINATED = FALSE /* 1st doses only */
+AND DS1_ADMIN_DATE > '5/8/2022'
+AND DS1_ADMIN_DATE < '12/31/2022'
+ORDER BY DS1_ADMIN_DATE asc
+
+/* Ethnicity 2nd */
+
+SELECT RECIP_ID, DS2_ADMIN_DATE, RECIP_RACE_ETH,
+    CASE WHEN RECIP_RACE_ETH = 'Latino' then 'Hispanic'
+         WHEN RECIP_RACE_ETH = 'White' then 'Non-Hispanic White'
+         WHEN RECIP_RACE_ETH = 'Asian' then 'Non-Hispanic Asian'
+         WHEN RECIP_RACE_ETH = 'Black or African American' then 'Non-Hispanic Black'
+         ELSE 'Other'
+    End as Ethnic_Group
+    FROM "Joined_TEMP"
+WHERE "Sex Assigned at Birth" = 'Male'
+AND "Gender Identity" = 'Man/Male'
+AND "Sexual Orientation" = 'Gay, lesbian, or same-gender loving'
+AND FULLY_VACCINATED = TRUE /* 1st doses only */
+AND DS2_ADMIN_DATE > '5/8/2022'
+AND DS2_ADMIN_DATE < '12/31/2022'
+ORDER BY DS2_ADMIN_DATE asc
