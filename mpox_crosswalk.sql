@@ -1,3 +1,5 @@
+/* Regional Analysis */
+
 ALTER SESSION SET WEEK_START = 7; /* Starts week on Sunday */
 SELECT DATE_PART(Week, ADMIN_DATE) as Week_Number, ADMIN_DATE, DOSE_NUM,
     CASE WHEN RECIP_AGE between 15 and 29 then '15-29'
@@ -6,19 +8,18 @@ SELECT DATE_PART(Week, ADMIN_DATE) as Week_Number, ADMIN_DATE, DOSE_NUM,
          WHEN RECIP_AGE between 50 and 59 then '50-59'
          WHEN RECIP_AGE >= 60 then '60+'
     End as Age_Group,
-    CASE WHEN RECIP_COUNTY_DESC IN ('Alameda', 'Berkeley', 'Contra Costa', 'Marin', 'Monterey',                      'Napa','San Benito', 'San Francisco', 'San Mateo', 'Santa Clara', 'Santa Cruz',        
+    CASE WHEN RECIP_COUNTY_DESC IN ('Alameda', 'Berkeley', 'Contra Costa', 'Marin', 'Monterey', 'Napa','San Benito', 'San Francisco', 'San Mateo', 'Santa Clara', 'Santa Cruz',        
                'Solano', 'Sonoma')
                then 'Bay Area Region'           
-         WHEN RECIP_COUNTY_DESC In ('Alpine', 'Amador', 'Butte', 'Colusa', 'El Dorado', 'Nevada',                     'Placer', 'Plumas', 'Sacramento', 'Sierra', 'Sutter', 'Yolo', 'Yuba')
+         WHEN RECIP_COUNTY_DESC In ('Alpine', 'Amador', 'Butte', 'Colusa', 'El Dorado', 'Nevada', 'Placer', 'Plumas', 'Sacramento', 'Sierra', 'Sutter', 'Yolo', 'Yuba')
               then 'Greater Sacramento Region'
          WHEN RECIP_COUNTY_DESC In ('Long Beach', 'Los Angeles', 'Pasadena')
               then 'Los Angeles Region'
-         WHEN RECIP_COUNTY_DESC In ('Del Norte', 'Glenn', 'Humboldt', 'Lake', 'Lassen', 'Mendocino',                  'Modoc', 'Shasta', 'Siskiyou', 'Tehama', 'Trinity')
+         WHEN RECIP_COUNTY_DESC In ('Del Norte', 'Glenn', 'Humboldt', 'Lake', 'Lassen', 'Mendocino', 'Modoc', 'Shasta', 'Siskiyou', 'Tehama', 'Trinity')
               then 'Rural Northern California Region'
-         WHEN RECIP_COUNTY_DESC In ('Calaveras', 'Fresno', 'Kern', 'Kings', 'Madera', 'Mariposa',                     'Merced', 'San Joaquin', 'Stanislaus', 'Tulare', 'Tuolumne')
+         WHEN RECIP_COUNTY_DESC In ('Calaveras', 'Fresno', 'Kern', 'Kings', 'Madera', 'Mariposa', 'Merced', 'San Joaquin', 'Stanislaus', 'Tulare', 'Tuolumne')
               then 'San Joaquin Valley Region'
-         WHEN RECIP_COUNTY_DESC In ('Imperial', 'Inyo', 'Mono', 'Orange', 'Riverside', 'San           
-              Bernardino', 'San Diego', 'San Luis Obispo', 'Santa Barbara', 'Ventura')
+         WHEN RECIP_COUNTY_DESC In ('Imperial', 'Inyo', 'Mono', 'Orange', 'Riverside', 'San Bernardino', 'San Diego', 'San Luis Obispo', 'Santa Barbara', 'Ventura')
               then 'Southern California Region'
     End as Region, 
     CASE WHEN RECIP_RACE_ETH = 'Latino' then 'Hispanic'
