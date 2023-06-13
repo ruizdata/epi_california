@@ -1,4 +1,5 @@
-/* Add a medical record number to MyTurn */ 
+/*  ETL process to join vaccine data with sexual orientation/gender identity tables in Snowflake
+    Add a medical record number to MyTurn */ 
 
 Create table MyTurn as
     Select *
